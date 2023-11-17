@@ -11,8 +11,10 @@ import router from './router'
 const app = createApp(App)
 app.component('EasyDataTable', Vue3EasyDataTable)
 
+import { createPinia } from 'pinia'
 
 app.use(ChartPlugin)
 app.use(router)
+ap.use(createPinia)
 
 app.mount('#app')
