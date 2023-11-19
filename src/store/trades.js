@@ -12,7 +12,7 @@ export const useTradesStore = defineStore("trades", {
     getters: {
         getTradesData() {
             return this.trades;
-        }
+        },
     },
     actions: {
         async getJournalData() {
@@ -25,13 +25,14 @@ export const useTradesStore = defineStore("trades", {
         async addTrades(data) {
             axios.post('http://127.0.0.1:8000/api/createTrade', data).then(result => {
                 this.trades = result.data.message
+                this.getJournalData()
                 this.closeModal()
             }).catch(error => {
                 this.errors = error.response.data.message
                 this.showModal()
             });
         },
-        
+
         closeModal() {
             this.isShowModal = false
             this.error = {};

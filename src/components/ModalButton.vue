@@ -84,7 +84,7 @@
         </template>
         <template #footer>
             <div class="flex justify-between">
-                <fwb-button @click="closeModal" color="red">
+                <fwb-button @click="tradeStore.closeModal" color="red">
                     Exit
                 </fwb-button>
                 <fwb-button @click.prevent="handleSubmit" color="green">

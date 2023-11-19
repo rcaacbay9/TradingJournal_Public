@@ -10,7 +10,7 @@
       <ModalButton />
     </div>
     <div class="flex flex-col sm:flex-row w-full">
-      <TableCard class="mb-4 sm:mb-0 sm:ml-4 w-full mt-3 mr-4" :trades="trades"/>
+      <TableCard class="mb-4 sm:mb-0 sm:ml-4 w-full mt-3 mr-4"/>
     </div>
   </main>
 </template>
@@ -38,18 +38,11 @@ export default {
   },
   setup() {
     const tradeStore = useTradesStore()
-    const trades = ref([]);
     
     onMounted(async () => {
       await tradeStore.getJournalData();
-      trades.value = tradeStore.getTradesData;
     })
-
-    return { tradeStore, trades }
-  },
-  data() {
-    return {
-    }
+    return { tradeStore }
   },
 }
 
