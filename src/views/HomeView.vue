@@ -10,14 +10,15 @@
       <ModalButton />
     </div>
     <div class="flex flex-col sm:flex-row w-full">
-      <TableCard class="mb-4 sm:mb-0 sm:ml-4 w-full mt-3 mr-4" :getTrades="getTrades" :trades="trades" />
+      <TableCard class="mb-4 sm:mb-0 sm:ml-4 w-full mt-3 mr-4" :trades="trades"/>
     </div>
   </main>
 </template>
 
 
 <script>
-import axios from 'axios';
+import { onMounted, ref } from 'vue';
+import { useTradesStore } from '../store/trades';
 import PerformanceCard from './Card/PerformanceCard.vue';
 import WinrateCard from './Card/WinrateCard.vue'
 import TopPairCardVue from './Card/TopPairCard.vue';
@@ -35,24 +36,21 @@ export default {
     FwbButton,
     ModalButton
   },
+  setup() {
+    const tradeStore = useTradesStore()
+    const trades = ref([]);
+    
+    onMounted(async () => {
+      await tradeStore.getJournalData();
+      trades.value = tradeStore.getTradesData;
+    })
+
+    return { tradeStore, trades }
+  },
   data() {
     return {
-      trades: [],
     }
   },
-  mounted() {
-        this.getTrades()
-    },
-  methods: {
-        async getTrades() {
-            try {
-                let result = await axios.get('http://127.0.0.1:8000/api/getTrades')
-                this.trades = result.data[0];
-            } catch (error) {
-                console.log(error);
-            }
-        },
-    }
 }
 
 </script>

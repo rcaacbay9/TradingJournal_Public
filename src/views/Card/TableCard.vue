@@ -1,17 +1,11 @@
 <template>
-    <!-- <pre>{{ items }}</pre> -->
     <EasyDataTable :headers="headers" :items="trades" border-cell buttons-pagination rows-per-page="4"
         :rows-items="[8, 12]" />
 </template>
 
 <script>
-import axios from 'axios';
-// import { ref } from 'vue';
 export default {
-    props: {
-        getTrades: Function,
-        trades: Array
-    },
+    props: ['trades'],
     data() {
         return {
             headers: [
@@ -25,6 +19,5 @@ export default {
             ],
         };
     },
-
 };
 </script>
