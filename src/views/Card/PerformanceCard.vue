@@ -20,7 +20,7 @@ export default {
     data() {
         return {
             testdata: {
-                labels: ['Paris', 'Nîmes', 'Toulon', 'Perpignan', 'Autre'],
+                labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
                 datasets: [
                     {
                         data: [30, 40, 60, 70, 5],

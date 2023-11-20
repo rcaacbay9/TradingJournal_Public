@@ -129,13 +129,6 @@ export default {
 
         return { trades, handleSubmit, tradeStore }
     },
-    data() {
-        return {
-            isShowModal: false,
-            errors: {},
-            date: new Date(),
-        }
-    },
 }
 </script>
 

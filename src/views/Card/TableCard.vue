@@ -17,7 +17,7 @@ export default {
             { text: 'RISK REWARD(RR)', value: 'risk_reward', sortable: true },
             { text: 'COMMENT', value: 'comment', width: 200 },
         ];
-        return { tradeStore, headers };
+        return { tradeStore, headers};
     },
 };
 </script>

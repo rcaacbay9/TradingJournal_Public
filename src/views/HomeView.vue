@@ -17,7 +17,7 @@
 
 
 <script>
-import { onMounted, ref } from 'vue';
+import { onMounted } from 'vue';
 import { useTradesStore } from '../store/trades';
 import PerformanceCard from './Card/PerformanceCard.vue';
 import WinrateCard from './Card/WinrateCard.vue'
@@ -41,6 +41,7 @@ export default {
     
     onMounted(async () => {
       await tradeStore.getJournalData();
+      await tradeStore.getWinrateData();
     })
     return { tradeStore }
   },
