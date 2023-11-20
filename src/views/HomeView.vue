@@ -10,7 +10,7 @@
       <ModalButton />
     </div>
     <div class="flex flex-col sm:flex-row w-full">
-      <TableCard class="mb-4 sm:mb-0 sm:ml-4 w-full mt-3 mr-4"/>
+      <TableCard class="mb-4 sm:mb-0 sm:ml-4 w-full mt-3 mr-4" />
     </div>
   </main>
 </template>
@@ -19,6 +19,8 @@
 <script>
 import { onMounted } from 'vue';
 import { useTradesStore } from '../store/trades';
+import { useWinrateStore } from '../store/winrate';
+import { usePairStore } from '../store/pairs'
 import PerformanceCard from './Card/PerformanceCard.vue';
 import WinrateCard from './Card/WinrateCard.vue'
 import TopPairCardVue from './Card/TopPairCard.vue';
@@ -38,10 +40,14 @@ export default {
   },
   setup() {
     const tradeStore = useTradesStore()
-    
+    const winrateStore = useWinrateStore()
+    const pairStore = usePairStore(
+
+    )
     onMounted(async () => {
       await tradeStore.getJournalData();
-      await tradeStore.getWinrateData();
+      await winrateStore.getWinrateData();
+      await pairStore.getPairData();
     })
     return { tradeStore }
   },

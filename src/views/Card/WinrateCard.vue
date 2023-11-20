@@ -1,10 +1,13 @@
 <template>
     <fwb-card>
-        <PieChart :chartData="tradeStore.getWinrate" :width="400" :height="250" :options="options" />
+        <PieChart :chartData="winrateStore.getWinrate" :width="400" :height="250" :options="options" />
         <div class="p-5">
+            <div class="flex justify-center">
+                <h3>Total Trades: {{  winrateStore.totalTrades}} </h3>
+            </div>
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">
                 Your Winrate:
-                <div :class="{'text-red-500' : tradeStore.winrate < 50, 'text-green-400' : tradeStore.winrate > 50}">{{ tradeStore.winrate }}%</div>
+                <div :class="{'text-red-500' : winrateStore.winrate < 50, 'text-green-400' : winrateStore.winrate > 50}">{{ winrateStore.winrate }}%</div>
             </h5>
         </div>
     </fwb-card>
@@ -12,7 +15,7 @@
 
 <script>
 import { ref } from 'vue'
-import { useTradesStore } from '../../store/trades';
+import { useWinrateStore } from '../../store/winrate';
 import { FwbCard } from 'flowbite-vue'
 import { PieChart } from 'vue-chart-3';
 export default {
@@ -21,21 +24,8 @@ export default {
         PieChart,
     },
     setup() {
-        const tradeStore = useTradesStore();
-        const options = ref({
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'top',
-                },
-                title: {
-                    display: true,
-                    text: 'Winrate'
-                },
-            },
-        });
-
-        return { tradeStore, options }
+        const winrateStore = useWinrateStore();
+        return { winrateStore }
     },
 }
 </script>
