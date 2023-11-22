@@ -14,7 +14,6 @@
 </template>
 
 <script>
-import { ref } from 'vue'
 import { useWinrateStore } from '../../store/winrate';
 import { FwbCard } from 'flowbite-vue'
 import { PieChart } from 'vue-chart-3';

@@ -2,8 +2,9 @@
     <fwb-card>
         <PolarAreaChart :chartData="pairStore.getPair" :width="400" :height="250" />
         <div class="p-5">
+            <div class="flex justify-center"></div>
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">
-                Pair that you traded
+                Pairs that you traded
             </h5>
         </div>
     </fwb-card>

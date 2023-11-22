@@ -1,6 +1,6 @@
 <template>
-    <fwb-button color="green" @click.prevent="tradeStore.showModal">Add Trades</fwb-button>
-    <fwb-modal v-if="tradeStore.isShowModal" @close="tradeStore.closeModal">
+    <fwb-button color="green" @click.prevent="openModal('addTrade')">Add Trades</fwb-button>
+    <fwb-modal v-if="tradeStore.modals.addTrade" @close="closeModal('addTrade')">
         <template #header>
             <div class="flex items-center text-2xl font-bold">
                 Journal Your Trade
@@ -17,8 +17,8 @@
                     <label for="date" class="text-base leading-relaxed Uppercase font-medium rounded-full">Date</label>
                     <VueDatePicker v-model="trades.time_executed" :is-24="false" required>
                     </VueDatePicker>
-                        <p v-if="tradeStore.errors.time_executed" class="text-red-500 font-bold text-sm mt-1 ml-1"> {{
-                            tradeStore.errors.time_executed[0] }} </p>
+                    <p v-if="tradeStore.errors.time_executed" class="text-red-500 font-bold text-sm mt-1 ml-1"> {{
+                        tradeStore.errors.time_executed[0] }} </p>
                 </div>
             </div>
             <div class="grid grid-cols-2 p-2">
@@ -55,7 +55,7 @@
         </template>
         <template #footer>
             <div class="flex justify-between">
-                <fwb-button @click="tradeStore.closeModal" color="red">
+                <fwb-button @click="closeModal('addTrade')" color="red">
                     Exit
                 </fwb-button>
                 <fwb-button @click.prevent="handleSubmit" color="green">
@@ -95,12 +95,21 @@ export default {
         })
         const handleSubmit = () => {
             tradeStore.addTrades(trades.value)
+            trades.value = {
+                pairs: '',
+                time_executed: '',
+                session: '',
+                position: '',
+                result: '',
+                risk_reward: '',
+                comment: '',
+            }
         }
-
         return { trades, handleSubmit, tradeStore }
     },
     data() {
         return {
+            tradeStore: useTradesStore(),
             session: [
                 { value: 'LONDON', name: 'London', },
                 { value: 'NY', name: 'New York', },
@@ -115,7 +124,15 @@ export default {
                 { value: 'SHORT', name: 'Short', },
             ],
         }
-    }
+    },
+    methods: {
+        openModal(modalId) {
+            this.tradeStore.showModal(modalId);
+        },
+        closeModal(modalId) {
+            this.tradeStore.closeModal(modalId);
+        }
+    },
 }
 </script>
 

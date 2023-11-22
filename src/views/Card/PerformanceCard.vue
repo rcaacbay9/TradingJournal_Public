@@ -1,8 +1,8 @@
 <template>
     <fwb-card>
-        <LineChart :chartData="testdata" :width="400" :height="250" />
+        <LineChart :chartData="usePerformance.getPeformance" :width="400" :height="250" />
         <div class="p-5">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">
+            <h5 class=" mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">
                 Your Performance
             </h5>
         </div>
@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import { usePerformanceStore } from '../../store/performance';
 import { FwbCard } from 'flowbite-vue'
 import { LineChart } from 'vue-chart-3';
 export default {
@@ -17,18 +18,10 @@ export default {
         FwbCard,
         LineChart,
     },
-    data() {
-        return {
-            testdata: {
-                labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-                datasets: [
-                    {
-                        data: [30, 40, 60, 70, 5],
-                        backgroundColor: ['#77CEFF', '#0079AF', '#123E6B', '#97B0C4', '#A5C8ED'],
-                    },
-                ],
-            },
-        }
+    setup() {
+        const usePerformance = usePerformanceStore()
+
+        return { usePerformance }
     },
 }
 </script>
