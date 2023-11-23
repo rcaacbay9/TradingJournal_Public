@@ -3,12 +3,13 @@ import { usePairStore } from '../store/pairs';
 import { useWinrateStore } from '../store/winrate';
 import { usePerformanceStore } from '../store/performance';
 import axios from 'axios'
+import { ref } from "vue";
 
 export const useTradesStore = defineStore("trades", {
     state: () => {
         return {
             trades: [],
-            editTrades: {},
+            editTrades: ref({}),
             errors: {},
             modals: {},
         }
@@ -47,12 +48,21 @@ export const useTradesStore = defineStore("trades", {
                 this.showModal()
             });
         },
-        editTradesData(dataId) {
-            axios.get('http://127.0.0.1:8000/api/getTrade/' + dataId).then(result => {
+        editTradesData(id) {
+            axios.get('http://127.0.0.1:8000/api/getTrade/' + id).then(result => {
                 this.editTrades = result.data[0]
-                console.log(this.editTrades)
             }).catch(error => {
-                this.errors = error
+                this.errors = error.response.data.message
+            })
+        },
+        saveEditData(data, id) {;
+            axios.put('http://127.0.0.1:8000/api/getTrade/edit/' + id, data).then(result => {
+                alert('Succussfully Edited!')
+                this.editTrades = {};
+                this.closeModal('editTrade')
+                this.getJournalData()
+            }).catch(error => {
+                this.errors = error.response.data.message
             })
         },
 
