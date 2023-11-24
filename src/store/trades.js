@@ -55,9 +55,10 @@ export const useTradesStore = defineStore("trades", {
                 this.errors = error.response.data.message
             })
         },
-        saveEditData(data, id) {;
+        saveEditData(data, id) {
+            ;
             axios.put('http://127.0.0.1:8000/api/getTrade/edit/' + id, data).then(result => {
-                alert('Succussfully Edited!')
+                alert('Data has been')
                 this.editTrades = {};
                 this.closeModal('editTrade')
                 this.getJournalData()
@@ -65,7 +66,14 @@ export const useTradesStore = defineStore("trades", {
                 this.errors = error.response.data.message
             })
         },
-
+        deleteTradeData(id) {
+            axios.delete('http://127.0.0.1:8000/api/getTrade/delete/' + id).then(result => {
+                alert(result.data.message)
+                this.getJournalData()
+            }).catch(error => {
+                console.log(error)
+            })
+        },
         closeModal(modalID) {
             this.errors = {};
             this.modals[modalID] = false

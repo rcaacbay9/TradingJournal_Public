@@ -7,18 +7,6 @@
         </template>
         <template #default="{ isShowMenu }">
             <fwb-navbar-collapse :is-show-menu="isShowMenu" >
-                <!-- <fwb-navbar-link is-active link="#" class="border-2 p-2 px-5 border-amber-200 rounded-full">
-                    Home
-                </fwb-navbar-link> -->
-                <!-- <fwb-navbar-link link="#">
-                    Services
-                </fwb-navbar-link>
-                <fwb-navbar-link link="#">
-                    Pricing
-                </fwb-navbar-link>
-                <fwb-navbar-link link="#">
-                    Contact
-                </fwb-navbar-link> -->
             </fwb-navbar-collapse>
         </template>
         <template #right-side>

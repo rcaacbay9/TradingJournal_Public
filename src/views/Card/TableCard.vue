@@ -3,13 +3,14 @@
         :rows-items="[8, 12]" :loading="loading">
         <template #item-operation="item">
             <div class="flex">
-                <fwb-button @click="edit(item)" color="default" class="m-1" outline square><span class="material-icons">edit</span></fwb-button>
-                <fwb-button color="red" class="m-1" outline square><span
+                <fwb-button @click="edit(item)" color="default" class="m-1" outline square><span
+                        class="material-icons">edit</span></fwb-button>
+                <fwb-button @click="deleteItem(item)" color="red" class="m-1" outline square><span
                         class="material-icons">delete_forever</span></fwb-button>
             </div>
         </template>
     </EasyDataTable>
-    <!--Modal Button--> 
+    <!--Modal Button-->
     <ModalEdit />
 </template>
 
@@ -45,7 +46,15 @@ export default {
             tradeStore.editTradesData(id)
             tradeStore.showModal('editTrade')
         };
-        return { tradeStore, headers, edit };
+
+        const deleteItem = (item) => {
+            const id = item.id
+            const response = confirm('Do you really want to delete the data?')
+            if (response) {
+                tradeStore.deleteTradeData(id)
+            }
+        };
+        return { tradeStore, headers, edit, deleteItem };
     },
     methods: {
         closeModal(modalID) {
